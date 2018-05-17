@@ -1,0 +1,28 @@
+handle_shape_x_axis//diamond-both: cylinderical
+handle_shape_x_axis//hexagonal-both: cylinderical
+handle_shape_y_axis//diamond-both: cylinderical
+handle_shape_y_axis//hexagonal-both: cylinderical
+handle_shape_z_axis//diamond-both: cylinderical
+handle_shape_z_axis//hexagonal-both: cylinderical
+handle_length//1-short handle-one hand
+handle_length//2-double handle-one or two hands based on blade size
+handle_length//3-medium handle-two hands-starting to be unwieldy with big blades
+handle_length//4-long handle-two hands-long reach
+head_shape_x_axis//diamond-both: cylinderical
+head_shape_x_axis//hexagonal-both: cylinderical
+head_shape_y_axis//diamond-both: cylinderical
+head_shape_y_axis//hexagonal-both: cylinderical
+head_shape_z_axis//diamond-both: cylinderical
+head_shape_z_axis//hexagonal-both: cylinderical
+head_scale_x_axis//1-short handle-one hand
+head_scale_x_axis//2-double handle-one or two hands based on blade size
+head_scale_x_axis//3-medium handle-two hands-starting to be unwieldy with big blades
+head_scale_x_axis//4-long handle-two hands-long reach
+head_scale_x_axis//1-short handle-one hand
+head_scale_x_axis//2-double handle-one or two hands based on blade size
+head_scale_x_axis//3-medium handle-two hands-starting to be unwieldy with big blades
+head_scale_x_axis//4-long handle-two hands-long reach
+head_scale_x_axis//1-short handle-one hand
+head_scale_x_axis//2-double handle-one or two hands based on blade size
+head_scale_x_axis//3-medium handle-two hands-starting to be unwieldy with big blades
+head_scale_x_axis//4-long handle-two hands-long reach
