@@ -390,6 +390,175 @@
 --------------------------------------------------------------------------------------------------------------------------------
 */
 
+/*Laptop*/
+/*--------------------------------------------------------------------------------------------------------------------------------*/
+.laptop {
+	transform-style: preserve-3d;
+}
+.laptop div {
+	transform-style: preserve-3d;
+	width: 0px;
+	height: 0px;
+	position: absolute;
+}
+.laptop>div>div {
+	background-color: #909090;
+	border-color: #909090;
+	border-width: 5px;
+}
+.laptop>div:nth-child(1) {
+}
+.laptop>div:nth-child(1)>div:nth-child(1) {
+	background-color: #c0c0c0;
+	border-style: solid;
+	width: 40px;
+	height: 40px;
+	transform: rotateX(90deg);
+	background-image: url('./img/objects/laptop/keyboard.png');
+}
+.laptop>div:nth-child(1)>div:nth-child(2) {
+	width: 50px;
+	height: 5px;
+	transform: translate3d(0px,25px,-25px);
+}
+.laptop>div:nth-child(1)>div:nth-child(3) {
+	width: 50px;
+	height: 5px;
+	transform: translate3d(0px,25px,25px);
+}
+.laptop>div:nth-child(1)>div:nth-child(4) {
+	width: 50px;
+	height: 5px;
+	transform: rotateY(90deg) translate3d(0px,25px,25px);
+}
+.laptop>div:nth-child(1)>div:nth-child(5) {
+	width: 50px;
+	height: 5px;
+	transform: rotateY(90deg) translate3d(0px,25px,-25px);
+}
+.laptop>div:nth-child(1)>div:nth-child(6) {
+	background-color: #c0c0c0;
+	border-style: solid;
+	width: 40px;
+	height: 40px;
+	transform: rotateX(90deg) translateZ(-5px);
+}
+.laptop>div:nth-child(2) {
+	transform: rotateX(-60deg) translate3d(0px,5px,-10px);
+}
+.laptop>div:nth-child(2)>div:nth-child(1) {
+	background-color: #000000;
+	border-style: solid;
+	width: 40px;
+	height: 40px;
+	transform: rotateX(90deg);
+	background-image: url('./img/objects/laptop/screen.png');
+}
+.laptop>div:nth-child(2)>div:nth-child(2) {
+	width: 50px;
+	height: 5px;
+	transform: translate3d(0px,25px,-25px);
+}
+.laptop>div:nth-child(2)>div:nth-child(3) {
+	width: 50px;
+	height: 5px;
+	transform: translate3d(0px,25px,25px);
+}
+.laptop>div:nth-child(2)>div:nth-child(4) {
+	width: 50px;
+	height: 5px;
+	transform: rotateY(90deg) translate3d(0px,25px,25px);
+}
+.laptop>div:nth-child(2)>div:nth-child(5) {
+	width: 50px;
+	height: 5px;
+	transform: rotateY(90deg) translate3d(0px,25px,-25px);
+}
+.laptop>div:nth-child(2)>div:nth-child(6) {
+	background-color: #c0c0c0;
+	border-style: solid;
+	width: 40px;
+	height: 40px;
+	transform: rotateX(90deg) translateZ(-5px);
+	background-image: url('./img/objects/laptop/logo.png');
+}
+/*
+--------------------------------------------------------------------------------------------------------------------------------
+<div class="laptop"><div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div><div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>
+--------------------------------------------------------------------------------------------------------------------------------
+*/
+
+/*Door*/
+/*--------------------------------------------------------------------------------------------------------------------------------*/
+.door {
+	transform-style: preserve-3d;
+}
+.door div {
+	transform-style: preserve-3d;
+	width: 0px;
+	height: 0px;
+	position: absolute;
+}
+.door>div:nth-child(1)>div {
+	background-color: #c0c0c0;
+}
+.door>div:nth-child(1)>div:nth-child(1) {
+	width: 5px;
+	height: 200px;
+	transform: rotateY(90deg) translate3d(50px,50px,40px);
+}
+.door>div:nth-child(1)>div:nth-child(2) {
+	width: 5px;
+	height: 200px;
+	transform: rotateY(90deg) translate3d(-50px,50px,40px);
+}
+.door>div:nth-child(1)>div:nth-child(3) {
+	width: 5px;
+	height: 200px;
+	transform: rotateY(0deg) translate3d(42.5px,50px,52.5px);
+}
+.door>div:nth-child(1)>div:nth-child(4) {
+	width: 5px;
+	height: 200px;
+	transform: rotateY(0deg) translate3d(42.5px,50px,47.5px);
+}
+.door>div:nth-child(1)>div:nth-child(5) {
+	width: 5px;
+	height: 200px;
+	transform: rotateY(0deg) translate3d(42.5px,50px,-52.5px);
+}
+.door>div:nth-child(1)>div:nth-child(6) {
+	width: 5px;
+	height: 200px;
+	transform: rotateY(0deg) translate3d(42.5px,50px,-47.5px);
+}
+.door>div:nth-child(1)>div:nth-child(7) {
+	width: 5px;
+	height: 105px;
+	transform: rotateX(90deg) rotateY(90deg) translate3d(0px,0px,40px);
+}
+.door>div:nth-child(1)>div:nth-child(8) {
+	width: 5px;
+	height: 105px;
+	transform: rotateX(90deg) translate3d(42.5px,0px,2.5px);
+}
+.door>div:nth-child(1)>div:nth-child(9) {
+	width: 5px;
+	height: 105px;
+	transform: rotateX(90deg) translate3d(42.5px,0px,-2.5px);
+}
+.door>div:nth-child(2)>div:nth-child(1) {
+	background-color: #e0e0e0;
+	width: 90px;
+	height: 195px;
+	transform: rotateY(90deg) translate3d(0px,55px,0px);
+}
+/*
+--------------------------------------------------------------------------------------------------------------------------------
+<div class="door"><div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div><div><div></div></div></div>
+--------------------------------------------------------------------------------------------------------------------------------
+*/
+
 /*Thing*/
 /*--------------------------------------------------------------------------------------------------------------------------------*/
 .thing {
@@ -397,6 +566,9 @@
 }
 .thing div {
 	transform-style: preserve-3d;
+	width: 0px;
+	height: 0px;
+	position: absolute;
 }
 /*
 --------------------------------------------------------------------------------------------------------------------------------
