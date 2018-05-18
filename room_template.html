@@ -1,6 +1,5 @@
 <html>
 <head>
-<meta charset="utf-8">
 <script src="jquery.js"></script>
 <style>
 body {
@@ -63,6 +62,8 @@ body {
 }
 .initface>.wallS {visibility: hidden;}
 .initface>.wallE {visibility: hidden;}
+.initface .onwallS {visibility: hidden;}
+.initface .onwallE {visibility: hidden;}
 .northface {
 	transform:translate3d(-200px,-100px,0px) rotateY(0deg);
 	animation-name: spinnorth;
@@ -73,6 +74,8 @@ body {
 }
 .northface>.wallS {visibility: hidden;}
 .northface>.wallE {visibility: hidden;}
+.northface .onwallS {visibility: hidden;}
+.northface .onwallE {visibility: hidden;}
 .westface {
 	transform:translate3d(-200px,-100px,0px) rotateY(-90deg);
 	animation-name: spinwest;
@@ -83,6 +86,8 @@ body {
 }
 .westface>.wallE {visibility: hidden;}
 .westface>.wallN {visibility: hidden;}
+.westface .onwallE {visibility: hidden;}
+.westface .onwallN {visibility: hidden;}
 .southface {
 	transform:translate3d(-200px,-100px,0px) rotateY(-180deg);
 	animation-name: spinsouth;
@@ -93,6 +98,8 @@ body {
 }
 .southface>.wallN {visibility: hidden;}
 .southface>.wallW {visibility: hidden;}
+.southface .onwallN {visibility: hidden;}
+.southface .onwallW {visibility: hidden;}
 .eastface {
 	transform:translate3d(-200px,-100px,0px) rotateY(-270deg);
 	animation-name: spineast;
@@ -103,6 +110,8 @@ body {
 }
 .eastface>.wallW {visibility: hidden;}
 .eastface>.wallS {visibility: hidden;}
+.eastface .onwallW {visibility: hidden;}
+.eastface .onwallS {visibility: hidden;}
 @keyframes spin {
 	100% {transform:rotateY(-360deg)}
 }
@@ -132,7 +141,7 @@ body {
 			<div class="desk" style="transform: translate3d(1px,100px,-199px)"><div><div></div><div></div><div></div><div></div><div></div><div></div></div><div><div></div><div></div><div></div><div></div></div><div><div></div><div></div><div></div><div></div></div><div><div></div><div></div><div></div><div></div></div><div><div></div><div></div><div></div><div></div></div></div>
 			<div class="chair" style="transform: translate3d(66px,135px,-149px)"><div><div></div><div></div><div></div><div></div><div></div><div></div></div><div><div></div><div></div><div></div><div></div></div><div><div></div><div></div><div></div><div></div></div><div><div></div><div></div><div></div><div></div></div><div><div></div><div></div><div></div><div></div></div><div><div></div><div></div><div></div><div></div><div></div></div></div>
 			<div class="laptop" style="transform: translate3d(76px,120px,-199px)"><div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div><div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>
-			<div class="door" style="transform: translate3d(452.5px,0px,-100px)"><div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div><div><div></div></div></div>
+			<div class="door onwallW" style="transform: translate3d(452.5px,0px,-100px)"><div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div><div><div></div></div></div>
 		</div>
 	</div>
 </body>
