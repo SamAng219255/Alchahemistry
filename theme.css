@@ -1,0 +1,12 @@
+body {
+	margin: 0px;
+	image-rendering: pixelated;
+	image-rendering: crisp-edges;/*One or the other will work, hopefully.*/
+	background-color: #000000;
+}
+#imgStorage {
+	display: none;
+}
+#viewWindow {
+	background-color: #000000;
+}
