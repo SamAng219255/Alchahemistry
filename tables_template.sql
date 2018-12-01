@@ -30,6 +30,30 @@ CREATE TABLE `items` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+CREATE TABLE `dungeon` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `username` varchar(16) NOT NULL,
+  `x` int NOT NULL DEFAULT '0',
+  `y` int NOT NULL DEFAULT '0',
+  `z` int NOT NULL DEFAULT '0',
+  `name` varchar(16) NOT NULL DEFAULT 'blank',
+  `sprite` varchar(16) NOT NULL DEFAULT 'none',
+  `data` text NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `base` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `username` varchar(16) NOT NULL,
+  `x` int NOT NULL DEFAULT '0',
+  `y` int NOT NULL DEFAULT '0',
+  `z` int NOT NULL DEFAULT '0',
+  `name` varchar(16) NOT NULL DEFAULT 'blank',
+  `sprite` varchar(16) NOT NULL DEFAULT 'none',
+  `data` text NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 CREATE TABLE `battlefield` (
   `id` int NOT NULL AUTO_INCREMENT,
   `x` int NOT NULL DEFAULT '0',
