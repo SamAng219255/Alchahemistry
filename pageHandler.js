@@ -65,6 +65,8 @@ function generalSetup() {
 			}
 		}
 	}
+	viewMap=$.getJSON("opening.json",{},function(stuff){viewMap=stuff;updateLayer(0,[0,1,2,3,4,5,6]);updateLayer(1,[0,1,2,3,4,5,6]);});
+	drawInter=setInterval(draw,0.125);
 }
 function updateLayer(layerNum,rows2Update) {
 	var z=layerNum;
@@ -77,7 +79,6 @@ function updateLayer(layerNum,rows2Update) {
 			}
 		}
 	}
-	console.log(z);
 	layrCtx[z].clearRect(0,0,layrCnv[z].width,layrCnv[z].height);
 	for(var y=0; y<rowCount; y++) {
 		layrCtx[z].drawImage(rowsCnv[z][y],0,tileSize*y,tileSize*(colCount+1),tileSize*2);
@@ -90,6 +91,7 @@ function draw() {
 	for(var i=0; i<3; i++) {
 		ctx.drawImage(layrCnv[i], viewStart[0]-tileSize/2, viewStart[1]-tileSize/2, (colCount+1)*tileSize, (rowCount+1)*tileSize);
 	}
+	ctx.fillStyle="#404040";
 	if(height/width>rowCount/colCount) {
 		ctx.fillRect(0,0,width,viewStart[1]);
 		ctx.fillRect(0,viewStart[1]+(rowCount*tileSize),width,viewStart[1]);
