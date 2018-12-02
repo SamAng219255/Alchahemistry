@@ -1,4 +1,4 @@
-spriteList=["sprites/barrel","sprites/enchantingTable","sprites/evergreenTree","sprites/ground"];
+spriteList=["sprites/barrel","sprites/enchantingTable","sprites/evergreenTree","sprites/dirtGround","sprites/grassGround","sprites/stoneGround"];
 rowCount=7;
 colCount=9;
 tileSize=0;
