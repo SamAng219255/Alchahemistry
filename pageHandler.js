@@ -1,4 +1,4 @@
-spriteList=[];
+spriteList=["sprites/Barrel","sprites/Enchanting_table","sprites/evergreen_tree"];
 rowCount=7;
 colCount=9;
 tileSize=0;
@@ -16,16 +16,16 @@ function canvasSetup() {
 	rowsCtx=[];
 	for(var z=0; z<3; z++) {
 		layrCnv.push(document.createElement('canvas'));
-		layrCnv[z].width=colCount*tileSize;
-		layrCnv[z].height=rowCount*tileSize;
+		layrCnv[z].width=(colCount+1)*tileSize;
+		layrCnv[z].height=(rowCount+1)*tileSize;
 		layrCtx.push(layrCnv[z].getContext('2d'));
 		layrCtx[z].imageSmoothingEnabled=false;
 		rowsCnv.push([]);
 		rowsCtx.push([]);
 		for(var y=0; y<rowCount; y++) {
 			rowsCnv[z].push(document.createElement('canvas'));
-			rowsCnv[z][y].width=colCount*tileSize;
-			rowsCnv[z][y].height=tileSize;
+			rowsCnv[z][y].width=(colCount+1)*tileSize;
+			rowsCnv[z][y].height=2*tileSize;
 			rowsCtx[z].push(rowsCnv[z][y].getContext('2d'));
 			rowsCtx[z][y].imageSmoothingEnabled=false;
 		}
@@ -70,22 +70,33 @@ function updateLayer(layerNum,rows2Update) {
 	var z=layerNum;
 	for(var i=0; i<rows2Update.length; i++) {
 		var y=rows2Update[i];
-		rowsCtx[z][y].clearRect(0,0,tileSize*colCount,tileSize);
+		rowsCtx[z][y].clearRect(0,0,rowsCnv[z][y].width,rowsCnv[z][y].height);
 		for(var x=0; x<colCount; x++) {
 			if(viewMap[z][y][x].sprite!="none") {
-				rowsCtx[z][y].drawImage(sprite[viewMap[z][y][x].sprite],tileSize*x,0,tileSize,tileSize);
+				rowsCtx[z][y].drawImage(sprite[viewMap[z][y][x].sprite],tileSize*x,0,tileSize*2,tileSize*2);
 			}
 		}
 	}
 	console.log(z);
-	layrCtx[z].clearRect(0,0,tileSize*colCount,tileSize*rowCount);
+	layrCtx[z].clearRect(0,0,layrCnv[z].width,layrCnv[z].height);
 	for(var y=0; y<rowCount; y++) {
-		layrCtx[z].drawImage(rowsCnv[z][y],0,tileSize*y,tileSize*colCount,tileSize);
+		layrCtx[z].drawImage(rowsCnv[z][y],0,tileSize*y,tileSize*(colCount+1),tileSize*2);
 	}
 }
 function draw() {
+	ctx.clearRect(0,0,width,height);
+	ctx.fillStyle="#000000";
+	ctx.fillRect(0,0,width,height);
 	for(var i=0; i<3; i++) {
-		ctx.drawImage(layrCnv[i], viewStart[0], viewStart[1], colCount*tileSize, rowCount*tileSize);
+		ctx.drawImage(layrCnv[i], viewStart[0]-tileSize/2, viewStart[1]-tileSize/2, (colCount+1)*tileSize, (rowCount+1)*tileSize);
+	}
+	if(height/width>rowCount/colCount) {
+		ctx.fillRect(0,0,width,viewStart[1]);
+		ctx.fillRect(0,viewStart[1]+(rowCount*tileSize),width,viewStart[1]);
+	}
+	else {
+		ctx.fillRect(0,0,viewStart[0],height);
+		ctx.fillRect(viewStart[0]+(colCount*tileSize),0,viewStart[0],height);
 	}
 }
 function displayTest() {
@@ -117,4 +128,18 @@ function displayTest() {
 		draw();
 		console.log("Loaded.");
 	},1000)
+}
+function tileAll(layrNum,spriteName) {
+	var newsprite=false;
+	for(var y=0; y<rowCount; y++) {
+		for(var x=0; x<colCount; x++) {
+			viewMap[layrNum][y][x].sprite=spriteName;
+		}
+	}
+	var tileList=[];
+	for(var i=0; i<rowCount; i++) {
+		tileList.push(i);
+	}
+	updateLayer(layrNum,tileList);
+	draw();
 }
