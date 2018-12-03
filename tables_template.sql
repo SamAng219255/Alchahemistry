@@ -25,6 +25,7 @@ CREATE TABLE `items` (
   `username` varchar(16) NOT NULL,
   `name` varchar(32) NOT NULL,
   `count` int NOT NULL,
+  `new` int NOT NULL,
   `slot` int NOT NULL,
   `data` text NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)

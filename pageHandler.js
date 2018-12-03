@@ -1,4 +1,4 @@
-spriteList=["sprites/barrel","sprites/enchantingTable","sprites/evergreenTree","sprites/dirtGround","sprites/grassGround","sprites/stoneGround"];
+spriteList=[];
 rowCount=7;
 colCount=9;
 tileSize=0;
@@ -54,18 +54,24 @@ function loadAssets(onComplete) {
 	ctx.font=(0.0575*width)+"px Helvetica";
 	ctx.fillText("Loading...",width*3/8,height*16/30);
 	loadDone=onComplete;
-	spriteCount=spriteList.length;
-	spritesLoaded=0;
-	sprite={};
-	for(var i=0; i<spriteList.length; i++) {
-		sprite[spriteList[i]]=document.createElement('img');
-		sprite[spriteList[i]].onload=spriteLoaded;
-		sprite[spriteList[i]].src="img/"+spriteList[i]+".png";
-	}
+	$.getJSON("sprites.php",{},function(stuff) {
+		spriteList=stuff;
+		loadJobsCount=spriteList.length;
+		loadJobsDone=0;
+		sprite={};
+		for(var i=0; i<spriteList.length; i++) {
+			sprite[spriteList[i]]=document.createElement('img');
+			sprite[spriteList[i]].onload=spriteLoaded;
+			sprite[spriteList[i]].src="img/"+spriteList[i]+".png";
+		}
+	}).fail(function( jqxhr, textStatus, error ) {
+		var err = textStatus + ", " + error;
+		console.log( "Request Failed: " + err );
+	});
 }
 function spriteLoaded() {
-	spritesLoaded++;
-	if(spritesLoaded>=spriteCount) {
+	loadJobsDone++;
+	if(loadJobsDone>=loadJobsCount) {
 		ctx.clearRect(0,0,width,height);
 		loadDone();
 	}
@@ -81,7 +87,7 @@ function generalSetup() {
 			}
 		}
 	}
-	viewMap=$.getJSON("opening.json",{},function(stuff){viewMap=stuff;updateLayer(0,[0,1,2,3,4,5,6]);updateLayer(1,[0,1,2,3,4,5,6]);});
+	viewMap=$.getJSON("opening.json",function(stuff){viewMap=stuff;updateLayer(0,[0,1,2,3,4,5,6]);updateLayer(1,[0,1,2,3,4,5,6]);});
 	drawInter=setInterval(draw,0.125);
 }
 function updateLayer(layerNum,rows2Update) {
@@ -123,24 +129,18 @@ function displayTest() {
 		for(var y=0; y<rowCount; y++) {
 			for(var x=0; x<colCount; x++) {
 				viewMap[z][y][x].sprite="testSprites/testSprite."+z+"."+y+"."+x;
-				if(spriteList.indexOf("testSprites/testSprite."+z+"."+y+"."+x)==-1) {
-					spriteList.push("testSprites/testSprite."+z+"."+y+"."+x);
-					newsprite=true;
-				}
 			}
 		}
 	}
 	clearInterval(drawInter);
-	loadAssets(function() {
-		var tileList=[];
-		for(var i=0; i<rowCount; i++) {
-			tileList.push(i);
-		}
-		for(var i=0; i<3; i++) {
-			updateLayer(i,tileList);
-		}
-		draw();
-	});
+	var tileList=[];
+	for(var i=0; i<rowCount; i++) {
+		tileList.push(i);
+	}
+	for(var i=0; i<3; i++) {
+		updateLayer(i,tileList);
+	}
+	draw();
 }
 function tileAll(layrNum,spriteName) {
 	var newsprite=false;
