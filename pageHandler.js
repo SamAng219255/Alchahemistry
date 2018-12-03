@@ -62,7 +62,7 @@ function loadAssets(onComplete) {
 		for(var i=0; i<spriteList.length; i++) {
 			sprite[spriteList[i]]=document.createElement('img');
 			sprite[spriteList[i]].onload=spriteLoaded;
-			sprite[spriteList[i]].src="img/"+spriteList[i]+".png";
+			sprite[spriteList[i]].src="img/sprites/"+spriteList[i]+".png";
 		}
 	}).fail(function( jqxhr, textStatus, error ) {
 		var err = textStatus + ", " + error;

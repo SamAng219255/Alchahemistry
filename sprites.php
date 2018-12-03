@@ -11,7 +11,7 @@
 							echo ',';
 						}
 						$GLOBALS['iter']++;
-						echo '"'.substr($path,6).substr($file,0,-4).'"';
+						echo '"'.substr($path,14).substr($file,0,-4).'"';
 					}
 				}
 			}
@@ -19,6 +19,6 @@
 	}
 	echo '[';
 	$GLOBALS['iter']=0;
-	outputSprites('./img/');
+	outputSprites('./img/sprites/');
 	echo ']';
 ?>
