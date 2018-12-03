@@ -130,22 +130,17 @@ function displayTest() {
 			}
 		}
 	}
-	if(newsprite) {
-		loadSprites();
-	}
-	console.log("Please wait...");
-	setTimeout(function() {
+	clearInterval(drawInter);
+	loadAssets(function() {
 		var tileList=[];
 		for(var i=0; i<rowCount; i++) {
 			tileList.push(i);
 		}
-		console.log(tileList);
 		for(var i=0; i<3; i++) {
 			updateLayer(i,tileList);
 		}
 		draw();
-		console.log("Loaded.");
-	},1000)
+	});
 }
 function tileAll(layrNum,spriteName) {
 	var newsprite=false;
