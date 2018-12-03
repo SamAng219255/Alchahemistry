@@ -46,15 +46,31 @@ function canvasResize() {
 		viewStart=[(width-colCount*tileSize)/2,0];
 	}
 }
-function loadSprites() {
+function loadAssets(onComplete) {
+	ctx.clearRect(0,0,width,height);
+	ctx.fillStyle="#219255";
+	ctx.fillRect(0,0,width,height);
+	ctx.fillStyle="#000000";
+	ctx.font=(0.0575*width)+"px Helvetica";
+	ctx.fillText("Loading...",width*3/8,height*16/30);
+	loadDone=onComplete;
+	spriteCount=spriteList.length;
+	spritesLoaded=0;
 	sprite={};
 	for(var i=0; i<spriteList.length; i++) {
 		sprite[spriteList[i]]=document.createElement('img');
+		sprite[spriteList[i]].onload=spriteLoaded;
 		sprite[spriteList[i]].src="img/"+spriteList[i]+".png";
 	}
 }
+function spriteLoaded() {
+	spritesLoaded++;
+	if(spritesLoaded>=spriteCount) {
+		ctx.clearRect(0,0,width,height);
+		loadDone();
+	}
+}
 function generalSetup() {
-	loadSprites();
 	viewMap=[];
 	for(var z=0; z<3; z++) {
 		viewMap.push([]);

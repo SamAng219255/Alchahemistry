@@ -6,7 +6,7 @@
 	<script src="pageHandler.js"></script>
 	<title>Alchahemistry</title>
 </head>
-<body onload="canvasSetup(); generalSetup();">
+<body onload="canvasSetup(); loadAssets(generalSetup);">
 	<canvas id="viewWindow"></canvas>
 </body>
 </html>
