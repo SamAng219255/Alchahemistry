@@ -6,7 +6,6 @@ CREATE TABLE `users` (
   `username` varchar(16) NOT NULL,
   `password` varchar(64) NOT NULL,
   `color` char(6) NOT NULL DEFAULT 'C0C0C0',
-  `pending` text NOT NULL,
   `ip` varchar(45) NOT NULL,
   `laston` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `prefix` varchar(16) NOT NULL DEFAULT '',
@@ -66,4 +65,4 @@ CREATE TABLE `battlefield` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-GRANT ALL PRIVILEGES ON `chat`.* TO `username`@`localhost` IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES ON `alchahemistry`.* TO `username`@`localhost` IDENTIFIED BY 'password';

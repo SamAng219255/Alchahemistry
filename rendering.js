@@ -3,8 +3,7 @@ rowCount=7;
 colCount=9;
 tileSize=0;
 viewStart=[0,0];
-lastDataError="";
-inAlert=false;
+cameraState=1;
 
 window.onresize = function(event) {
 	canvasResize();
@@ -32,14 +31,14 @@ function canvasSetup() {
 			rowsCtx[z][y].imageSmoothingEnabled=false;
 		}
 	}
-	entCnv=document.createElement('canvas');
-	entCnv.width=colCount*tileSize;
-	entCnv.height=rowCount*tileSize;
-	entCtx=entCnv.getContext('2d');
 	uiCnv=document.createElement('canvas');
 	uiCnv.width=colCount*tileSize;
 	uiCnv.height=rowCount*tileSize;
 	uiCtx=uiCnv.getContext('2d');
+	alrtCnv=document.createElement('canvas');
+	alrtCnv.width=colCount*tileSize;
+	alrtCnv.height=rowCount*tileSize;
+	alrtCtx=uiCnv.getContext('2d');
 }
 function canvasResize() {
 	canvas=document.getElementById("viewWindow");
@@ -106,52 +105,6 @@ function generalSetup() {
 	}
 	viewMap=$.getJSON("opening.json",function(stuff){viewMap=stuff;updateLayer(0,[0,1,2,3,4,5,6]);updateLayer(1,[0,1,2,3,4,5,6]);});
 	drawInter=setInterval(draw,0.125);
-	dataRate=0;
-	dataRateAVG=[];
-	for(var i=0; i<1000; i++) {
-		dataRateAVG.push(-1);
-	}
-	dataRateAVGPlace=0;
-	dataDrawn=(new Date()).getTime();
-	$.getJSON("receiveData.php",handleData).fail(function(jqxhr,textStatus,error)
-		{
-			var err = textStatus + ", " + error;
-			console.log( "receiveData.php Request Failed: " + err );
-		}
-	)
-}
-function handleData(data) {
-	dataRate=(new Date()).getTime()-dataDrawn;
-	dataRateAVGVal=0;
-	dataRateAVG[dataRateAVGPlace%1000]=dataRate;
-	for(var i=0; i<Math.min(1000,dataRateAVGPlace+1); i++) {
-		dataRateAVGVal+=dataRateAVG[i];
-	}
-	dataRateAVGVal/=Math.min(1000,dataRateAVGPlace+1);
-	dataRateAVGVal-=10;
-	dataRateAVGPlace++;
-	dataDrawn=(new Date()).getTime();
-	if(data.error==undefined) {
-		viewMap=data.viewMap;
-		if(data.state=='load') {
-			updateLayer(0,[0,1,2,3,4,5,6]);
-			updateLayer(1,[0,1,2,3,4,5,6]);
-			updateLayer(2,[0,1,2,3,4,5,6]);
-		}
-	}
-	else if(data.error!=lastDataError) {
-		console.log("receiveData.php has returned the following error:\n"+data.error);
-		lastDataError=data.error;
-		if(data.error=="No user logged in." && !(location.href.split("/")[0]=="localhost" && location.href.includes("bypasslogin"))) {
-			toggleAlrt("You are not logged in.\nPlease refresh the page and login to continue.",[{name:"Refresh Page",action:"location.reload()"}]);
-		}
-	}
-	setTimeout(function(){$.getJSON("receiveData.php",handleData).fail(function(jqxhr,textStatus,error)
-		{
-			var err = textStatus + ", " + error;
-			console.log( "receiveData.php Request Failed: " + err );
-		}
-	)},10);
 }
 function updateLayer(layerNum,rows2Update) {
 	var z=layerNum;
@@ -174,35 +127,14 @@ function updateUI() {
 	uiCtx.drawImage();
 }
 function toggleAlrt(msg,opt) {
-	if(inAlert) {
-		$("#alert").remove();
-		alrtBlur.style="display:none;";
-		$("body")[0].onkeydown=null;
-		inAlert=false;
+	if(cameraState==2) {
+		alrtCtx.clearRect(0,0,alrtCnv.width,alrtCnv.height);
+		cameraState=1;
 	}
 	else {
-		alrtBlur.style="display:block;";
-		var alrt=document.createElement("div");
-		alrt.id="alert";
-		var message=document.createElement("p");
-		message.innerHTML=msg;
-		alrt.appendChild(message);
-		if(opt.length>0) {
-			var btnhold=document.createElement("div");
-			for(var i=0; i<opt.length; i++) {
-				var btn=document.createElement("button");
-				btn.innerHTML=opt[i].name;
-				btn.func=opt[i].action+"; toggleAlrt();";
-				btn.onclick=function(){eval(this.func)};
-				btnhold.appendChild(btn);
-			}
-			alrt.appendChild(btnhold);
-			if(opt.length==1) {
-				$("body")[0].onkeydown=function(e){if(e.which==13||e.keyCode==13){eval($("#alert>div>button")[0].func)}};
-			}
-		}
-		$("body")[0].appendChild(alrt);
-		inAlert=true;
+		alrtCtx.fillStyle="rgba(0,0,0,0.5)";
+		alrtCtx.fillRect(0,0,alrtCnv.width,alrtCnv.height);
+		cameraState=2;
 	}
 }
 function draw() {
@@ -212,8 +144,12 @@ function draw() {
 	for(var i=0; i<3; i++) {
 		ctx.drawImage(layrCnv[i], viewStart[0]-tileSize/2, viewStart[1]-tileSize/2, (colCount+1)*tileSize, (rowCount+1)*tileSize);
 	}
-	ctx.drawImage(entCnv,viewStart[0],viewStart[1]);
-	ctx.drawImage(uiCnv,viewStart[0],viewStart[1]);
+	if(cameraState>=1) {
+		ctx.drawImage(uiCnv,viewStart[0],viewStart[1]);
+		if(cameraState>=2) {
+			ctx.drawImage(alrtCnv,viewStart[0],viewStart[1]);
+		}
+	}
 	ctx.fillStyle="#404040";
 	if(height/width>rowCount/colCount) {
 		ctx.fillRect(0,0,width,viewStart[1]);
@@ -257,4 +193,3 @@ function tileAll(layrNum,spriteName) {
 	updateLayer(layrNum,tileList);
 	draw();
 }
-

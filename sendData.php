@@ -7,7 +7,10 @@
 	$_SESSION['last_active_a']=time();
 	if(isset($_SESSION['user_a'])) {
 		require 'db.php';
-		if($_POST['action']=='move') {
+		if($_POST['action']=='load') {
+			
+		}
+		elseif($_POST['action']=='move') {
 			$delta=([[1,0],[0,-1],[-1,0],[0,1]])[$_POST['direction']%4];
 
 		}
